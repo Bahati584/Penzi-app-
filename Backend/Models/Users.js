@@ -32,10 +32,7 @@ const userSchema = new mongoose.Schema({
       'registered'
     ],
     default: 'awaiting_basic_info'
-  },
-
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: Date
-}, { collection: 'User details' }); 
+  }
+}, { timestamps: true, collection:'User details' });
 
 export default mongoose.model('User', userSchema);
