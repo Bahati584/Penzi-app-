@@ -1,22 +1,18 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  phone: { type: String, required: true, unique: true },
-  name: String,
-  age: Number,
-  gender: { type: String, enum: ['Male', 'Female', 'Other'] },
-  county: String,
-  town: String,
-
-
-  levelOfEducation: String,
-  profession: String,
-  maritalStatus: String,
-  religion: String,
-  ethnicity: String,
-
-
-  selfDescription: String,
+  name: { type: String, required: true, minlength: 2 },
+  age: { type: Number, required: true, min: 18 },
+  gender: { type: String, enum: ["Male", "Female"], required: true },
+  county: { type: String, required: true },
+  town: { type: String, required: true },
+  phone: { type: String, required: true, unique: true, match: /^\d{10}$/ },
+  levelOfEducation: { type: String },
+  profession: { type: String },
+  maritalStatus: { type: String },
+  religion: { type: String },
+  ethnicity: { type: String },
+  description: { type: String },
 
 
   liked: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
@@ -35,4 +31,6 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true, collection:'User details' });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.models.User || mongoose.model('User', userSchema);
+
+

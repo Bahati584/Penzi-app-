@@ -6,4 +6,5 @@ const notificationSchema = new mongoose.Schema({
   type: String
 }, { timestamps: true, collection: 'Notification and sms log' });
 
-export default mongoose.model('Notification', notificationSchema);
+export default mongoose.models.Notification || mongoose.model('Notification', notificationSchema);
+
